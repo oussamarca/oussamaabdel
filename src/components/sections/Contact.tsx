@@ -1,59 +1,111 @@
 import { motion, useInView } from "framer-motion";
-import { Mail, Linkedin, Send, CheckCircle, AlertCircle } from "lucide-react";
+import { Mail, Linkedin, Send, CheckCircle, MessageCircle } from "lucide-react";
 import { useRef, useState, FormEvent } from "react";
 import emailjs from "@emailjs/browser";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
-const EMAILJS_SERVICE_ID = "service_portfolio";
-const EMAILJS_TEMPLATE_ID = "template_contact";
-const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+const EMAILJS_SERVICE_ID = "service_hv3hoeg";
+const EMAILJS_TEMPLATE_ID = "template_y1de5dp";
+const EMAILJS_PUBLIC_KEY = "-d5W91NVvEZ79pRhH";
+const WHATSAPP_NUMBER = "212629162012";
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  message?: string;
+}
+
+const validateForm = (data: { name: string; email: string; message: string }): FormErrors => {
+  const errors: FormErrors = {};
+  if (!data.name.trim()) errors.name = "Name is required";
+  else if (data.name.trim().length > 100) errors.name = "Name must be under 100 characters";
+  if (!data.email.trim()) errors.email = "Email is required";
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) errors.email = "Invalid email address";
+  else if (data.email.trim().length > 255) errors.email = "Email must be under 255 characters";
+  if (!data.message.trim()) errors.message = "Message is required";
+  else if (data.message.trim().length > 1000) errors.message = "Message must be under 1000 characters";
+  return errors;
+};
 
 export const Contact = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const formRef = useRef<HTMLFormElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-80px" });
 
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [errors, setErrors] = useState<FormErrors>({});
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errors[name as keyof FormErrors]) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
   };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
-      toast.error("Please fill in all fields.");
+    const validationErrors = validateForm(formData);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       return;
     }
 
     setSending(true);
     try {
-      await emailjs.sendForm(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        formRef.current!,
-        EMAILJS_PUBLIC_KEY
-      );
+      // Step 1: Save to Supabase
+      const { error: dbError } = await supabase.from("contact").insert([
+        { name: formData.name.trim(), email: formData.email.trim(), message: formData.message.trim() },
+      ]);
+      if (dbError) {
+        console.error("Supabase error:", dbError);
+        toast.error("Failed to save message. Please try again.");
+        setSending(false);
+        return;
+      }
+
+      // Step 2: Send email via EmailJS
+      try {
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          message: formData.message.trim(),
+        }, EMAILJS_PUBLIC_KEY);
+      } catch (emailError) {
+        console.error("EmailJS error:", emailError);
+        toast.error("Message saved but email failed to send.");
+        setSending(false);
+        return;
+      }
+
       setSent(true);
       setFormData({ name: "", email: "", message: "" });
+      setErrors({});
       toast.success("Message sent successfully ✅");
-    } catch {
+    } catch (err) {
+      console.error("Unexpected error:", err);
       toast.error("Something went wrong. Please try again.");
     } finally {
       setSending(false);
     }
   };
 
+  const openWhatsApp = () => {
+    const text = `New message from portfolio:\n\nName: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`;
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, "_blank");
+  };
+
   const inputClasses =
     "w-full bg-secondary/50 border border-border rounded-xl px-5 py-3.5 text-foreground placeholder:text-muted-foreground/50 outline-none transition-all duration-300 focus:border-primary/60 focus:shadow-[0_0_20px_hsl(var(--primary)/0.15)] focus:bg-secondary/70";
+
+  const errorClass = "border-destructive/60 focus:border-destructive/80";
 
   return (
     <section id="contact" className="py-28 relative scroll-mt-24" ref={sectionRef}>
       <div className="absolute inset-0 grid-pattern opacity-20" />
 
-      {/* Ambient glow */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
@@ -65,7 +117,6 @@ export const Contact = () => {
       </motion.div>
 
       <div className="container mx-auto px-6 relative z-10">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -81,7 +132,6 @@ export const Contact = () => {
           </p>
         </motion.div>
 
-        {/* Form Card */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -108,7 +158,7 @@ export const Contact = () => {
                 </button>
               </motion.div>
             ) : (
-              <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-5">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-muted-foreground mb-2">
                     Name
@@ -121,9 +171,13 @@ export const Contact = () => {
                     onChange={handleChange}
                     placeholder="Your name"
                     maxLength={100}
-                    className={inputClasses}
-                    required
+                    className={`${inputClasses} ${errors.name ? errorClass : ""}`}
                   />
+                  {errors.name && (
+                    <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="text-destructive text-sm mt-1.5">
+                      {errors.name}
+                    </motion.p>
+                  )}
                 </div>
 
                 <div>
@@ -138,9 +192,13 @@ export const Contact = () => {
                     onChange={handleChange}
                     placeholder="your@email.com"
                     maxLength={255}
-                    className={inputClasses}
-                    required
+                    className={`${inputClasses} ${errors.email ? errorClass : ""}`}
                   />
+                  {errors.email && (
+                    <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="text-destructive text-sm mt-1.5">
+                      {errors.email}
+                    </motion.p>
+                  )}
                 </div>
 
                 <div>
@@ -155,28 +213,42 @@ export const Contact = () => {
                     placeholder="Tell me about your project..."
                     maxLength={1000}
                     rows={5}
-                    className={`${inputClasses} resize-none`}
-                    required
+                    className={`${inputClasses} resize-none ${errors.message ? errorClass : ""}`}
                   />
+                  {errors.message && (
+                    <motion.p initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} className="text-destructive text-sm mt-1.5">
+                      {errors.message}
+                    </motion.p>
+                  )}
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={sending}
-                  className="w-full flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-gradient-to-r from-[hsl(210,100%,65%)] to-[hsl(270,80%,60%)] text-primary-foreground font-semibold text-base transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_35px_hsl(var(--primary)/0.4)] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
-                >
-                  {sending ? (
-                    <span className="inline-block w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
-                  ) : (
-                    <Send className="w-5 h-5" />
-                  )}
-                  {sending ? "Sending..." : "Send Message"}
-                </button>
+                <div className="flex flex-col gap-3">
+                  <button
+                    type="submit"
+                    disabled={sending}
+                    className="w-full flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-gradient-to-r from-[hsl(210,100%,65%)] to-[hsl(270,80%,60%)] text-primary-foreground font-semibold text-base transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_35px_hsl(var(--primary)/0.4)] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
+                  >
+                    {sending ? (
+                      <span className="inline-block w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                    ) : (
+                      <Send className="w-5 h-5" />
+                    )}
+                    {sending ? "Sending..." : "Send Message"}
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={openWhatsApp}
+                    className="w-full flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl border border-border bg-transparent text-foreground font-semibold text-base transition-all duration-300 hover:bg-secondary/50 hover:border-green-500/40 hover:shadow-[0_0_20px_rgba(34,197,94,0.15)] active:scale-[0.98]"
+                  >
+                    <MessageCircle className="w-5 h-5 text-green-500" />
+                    Contact via WhatsApp
+                  </button>
+                </div>
               </form>
             )}
           </div>
 
-          {/* Quick Links */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
