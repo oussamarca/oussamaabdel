@@ -68,11 +68,14 @@ export const Contact = () => {
 
       // Step 2: Send email via EmailJS
       try {
-        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        const templateParams = {
           name: formData.name.trim(),
           email: formData.email.trim(),
           message: formData.message.trim(),
-        }, EMAILJS_PUBLIC_KEY);
+        };
+        console.log("EmailJS sending with params:", templateParams);
+        const res = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY);
+        console.log("SUCCESS", res);
       } catch (emailError) {
         console.error("EmailJS error:", emailError);
         toast.error("Message saved but email failed to send.");
