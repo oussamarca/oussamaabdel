@@ -259,7 +259,9 @@ export const Contact = () => {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8"
           >
             <a
-              href="mailto:oussamaabdel889@gmail.com"
+              href="https://mail.google.com/mail/?view=cm&to=oussamaabdel889@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border bg-transparent text-muted-foreground font-medium text-sm transition-all duration-300 hover:text-foreground hover:border-primary/40 hover:shadow-[0_0_15px_hsl(var(--primary)/0.15)]"
             >
               <Mail className="w-4 h-4" />
