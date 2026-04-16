@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
 const EMAILJS_SERVICE_ID = "service_hv3hoeg";
-const EMAILJS_TEMPLATE_ID = "template_y1de5dp";
+const EMAILJS_TEMPLATE_ID = "template_ylde5dp";
 const EMAILJS_PUBLIC_KEY = "budvjv9w39FxFHy1X";
 const WHATSAPP_NUMBER = "212629162012";
 
