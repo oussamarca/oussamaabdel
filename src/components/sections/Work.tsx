@@ -40,7 +40,7 @@ const projects = [
     color: "from-emerald-500/20 to-green-500/10",
     result: "Elevated brand presence and provided a polished platform to attract and convert new customers.",
     url: "https://oil-kamo.vercel.app/",
-    preview: "/images/oil-kamo-preview.png",
+    preview: "/images/oil-kamo-preview.jpg",
   },
   {
     icon: Bot,
