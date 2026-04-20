@@ -33,6 +33,16 @@ const projects = [
     preview: "/images/datte-dor-preview.png",
   },
   {
+    icon: Coffee,
+    title: "Oil Kamo",
+    description: "Crafted a sleek brand website for Oil Kamo, presenting premium oil products with elegant visuals and a smooth, conversion-driven customer journey.",
+    tags: ["React", "Tailwind CSS", "Brand Website"],
+    color: "from-emerald-500/20 to-green-500/10",
+    result: "Elevated brand presence and provided a polished platform to attract and convert new customers.",
+    url: "https://oil-kamo.vercel.app/",
+    preview: "/images/oil-kamo-preview.png",
+  },
+  {
     icon: Bot,
     title: "AI-Powered Customer Support Agent",
     description: "Built an AI-powered customer support automation system capable of receiving user messages, detecting intent, and generating contextual responses using AI models. The workflow integrates automation logic, AI APIs, and response formatting to handle common support inquiries efficiently.",
