@@ -89,8 +89,8 @@ const itemVariants = {
 };
 
 export const Work = () => {
-  const websiteProjects = projects.slice(0, 3);
-  const automationProjects = projects.slice(3);
+  const websiteProjects = projects.slice(0, 4);
+  const automationProjects = projects.slice(4);
 
   const renderProjectGrid = (projectList: typeof projects) => (
     <motion.div
