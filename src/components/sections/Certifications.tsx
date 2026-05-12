@@ -2,6 +2,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Award, ExternalLink, X, ZoomIn } from "lucide-react";
 import { useState } from "react";
 import n8nCertificate from "@/assets/certificates/n8n-basics-certificate.jpg";
+import agileAiCertificate from "@/assets/certificates/agile-in-ai-development.png";
+import agileAllerViteCertificate from "@/assets/certificates/agile-bootcamp-aller-vite.png";
+import ranadabSoftSkillsCertificate from "@/assets/certificates/ranadab-soft-skills.png";
 
 const certifications = [
   {
@@ -11,6 +14,33 @@ const certifications = [
     duration: "1 hour",
     credentialId: "SYNRA-L228RMJT",
     image: n8nCertificate,
+    verifyUrl: "#",
+  },
+  {
+    title: "Agile in AI Development",
+    issuer: "Agile B Darija",
+    date: "March 6, 2026",
+    duration: "Workshop",
+    credentialId: "AGILE-BOOTCAMP-AI-2026",
+    image: agileAiCertificate,
+    verifyUrl: "#",
+  },
+  {
+    title: 'L\'Agile, ce n\'est pas "aller vite"',
+    issuer: "Agile B Darija",
+    date: "March 13, 2026",
+    duration: "Workshop",
+    credentialId: "AGILE-BOOTCAMP-AV-2026",
+    image: agileAllerViteCertificate,
+    verifyUrl: "#",
+  },
+  {
+    title: "L'Agilité : la compétence clé du futur",
+    issuer: "Agile B Darija",
+    date: "March 11, 2026",
+    duration: "Workshop",
+    credentialId: "RANADAB-SOFT-SKILLS-2026",
+    image: ranadabSoftSkillsCertificate,
     verifyUrl: "#",
   },
 ];
