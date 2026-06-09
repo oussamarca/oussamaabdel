@@ -14,16 +14,6 @@ const projects = [
   },
   {
     icon: Coffee,
-    title: "Don Camillo Website",
-    description: "Designed and launched a polished website experience for Don Camillo, highlighting brand identity, key offerings, and contact flow for customer engagement.",
-    tags: ["React", "Tailwind CSS", "UI/UX"],
-    color: "from-orange-500/20 to-red-500/10",
-    result: "Improved online visibility and helped drive more qualified customer inquiries.",
-    url: "https://don-camillo-pearl.vercel.app/",
-    preview: "/images/don-camillo-preview.png",
-  },
-  {
-    icon: Coffee,
     title: "La Datte d'Or",
     description: "Built a premium brand website for La Datte d'Or, showcasing products, visual storytelling, and a conversion-focused customer journey.",
     tags: ["React", "Tailwind CSS", "Brand Website"],
@@ -89,8 +79,8 @@ const itemVariants = {
 };
 
 export const Work = () => {
-  const websiteProjects = projects.slice(0, 4);
-  const automationProjects = projects.slice(4);
+  const websiteProjects = projects.slice(0, 3);
+  const automationProjects = projects.slice(3);
 
   const renderProjectGrid = (projectList: typeof projects) => (
     <motion.div
