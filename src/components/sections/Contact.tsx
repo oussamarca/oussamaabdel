@@ -1,5 +1,5 @@
 import { motion, useInView } from "framer-motion";
-import { Mail, Linkedin, Send, CheckCircle, MessageCircle } from "lucide-react";
+import { Mail, Linkedin, Send, CheckCircle, MessageCircle, Github } from "lucide-react";
 import { useRef, useState, FormEvent } from "react";
 import emailjs from "@emailjs/browser";
 import { toast } from "sonner";
@@ -275,6 +275,15 @@ export const Contact = () => {
             >
               <Linkedin className="w-4 h-4" />
               LinkedIn
+            </a>
+            <a
+              href="https://github.com/oussamarca"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border bg-transparent text-muted-foreground font-medium text-sm transition-all duration-300 hover:text-foreground hover:border-primary/40 hover:shadow-[0_0_15px_hsl(var(--primary)/0.15)]"
+            >
+              <Github className="w-4 h-4" />
+              GitHub
             </a>
           </motion.div>
         </motion.div>
