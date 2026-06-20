@@ -1,13 +1,16 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Github } from "lucide-react";
 const navLinks = [{
   name: "Work",
   href: "#work"
 }, {
   name: "Skills",
   href: "#skills"
+}, {
+  name: "GitHub Projects",
+  href: "#github"
 }, {
   name: "About",
   href: "#about"
