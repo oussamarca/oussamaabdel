@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, ExternalLink, Hand, Globe, Sparkles } from "lucide-react";
+import { Github, ExternalLink, Hand, Sparkles } from "lucide-react";
 
 const repos = [
   {
@@ -11,16 +11,6 @@ const repos = [
     github: "https://github.com/oussamarca/Air-drawing",
     demo: null,
     color: "from-emerald-500/20 to-cyan-500/10",
-  },
-  {
-    icon: Globe,
-    title: "Portfolio Website",
-    description:
-      "My personal developer portfolio — modern React + Tailwind site with smooth animations, dark futuristic UI, and AI-focused content.",
-    tags: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
-    github: "https://github.com/oussamarca",
-    demo: "https://oussama-abdeljebbar.com/",
-    color: "from-blue-500/20 to-purple-500/10",
   },
   {
     icon: Sparkles,
