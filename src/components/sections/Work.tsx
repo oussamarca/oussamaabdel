@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, ExternalLink, Bot, Workflow, MessageSquare, Coffee, Hand, Github } from "lucide-react";
+import { ArrowUpRight, ExternalLink, Bot, Workflow, MessageSquare, Coffee } from "lucide-react";
 
 const pythonProjects = [
   {
