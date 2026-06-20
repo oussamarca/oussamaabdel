@@ -223,13 +223,6 @@ export const Work = () => {
             </h3>
             {renderProjectGrid(automationProjects)}
           </div>
-
-          <div>
-            <h3 className="text-3xl md:text-4xl font-bold mb-6">
-              <span className="text-gradient">Python & AI Projects</span>
-            </h3>
-            {renderProjectGrid(pythonProjects)}
-          </div>
         </div>
       </div>
     </section>
