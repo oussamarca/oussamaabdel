@@ -1,19 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, ExternalLink, Bot, Workflow, MessageSquare, Coffee } from "lucide-react";
 
-const pythonProjects = [
-  {
-    icon: Hand,
-    title: "Air Drawing",
-    description:
-      "A real-time computer vision application that allows users to draw in the air using hand tracking and gesture recognition. Built with Python and OpenCV to demonstrate practical computer vision and human-computer interaction techniques.",
-    tags: ["Python", "OpenCV", "Computer Vision", "Hand Tracking"],
-    color: "from-emerald-500/20 to-cyan-500/10",
-    result: "Developed an interactive drawing system controlled entirely through hand movements without requiring physical input devices.",
-    url: "https://github.com/oussamarca/Air-drawing",
-    preview: null,
-  },
-];
 
 const projects = [
   {
