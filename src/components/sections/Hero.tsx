@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Brain, Sparkles, Github } from "lucide-react";
+import { ArrowRight, Github } from "lucide-react";
 import { Typewriter } from "@/components/ui/typewriter";
 import profilePhoto from "@/assets/profile-photo.png";
 export const Hero = () => {
