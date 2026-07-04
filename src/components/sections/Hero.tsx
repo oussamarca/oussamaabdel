@@ -86,12 +86,6 @@ export const Hero = () => {
               </a>
             </Button>
             <Button variant="hero-outline" size="xl" asChild>
-              <a href="#about">
-                <Brain className="w-5 h-5" />
-                About Me
-              </a>
-            </Button>
-            <Button variant="hero-outline" size="xl" asChild>
               <a href="https://github.com/oussamarca" target="_blank" rel="noopener noreferrer">
                 <Github className="w-5 h-5" />
                 GitHub
