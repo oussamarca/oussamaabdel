@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, ExternalLink, Bot, Workflow, MessageSquare, Coffee } from "lucide-react";
+import { GithubProjects } from "./GithubProjects";
 
 
 const projects = [
@@ -179,7 +180,7 @@ export const Work = () => {
   );
 
   return (
-    <section id="work" className="py-24 relative">
+    <section id="projects" className="py-24 relative scroll-mt-24">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -211,6 +212,8 @@ export const Work = () => {
             {renderProjectGrid(automationProjects)}
           </div>
         </div>
+
+        <GithubProjects />
       </div>
     </section>
   );

@@ -36,7 +36,7 @@ const itemVariants = {
 
 export const GithubProjects = () => {
   return (
-    <section id="github" className="py-24 relative scroll-mt-24">
+    <div className="py-24 relative scroll-mt-24">
       <div className="absolute inset-0 grid-pattern opacity-20" />
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
@@ -136,6 +136,6 @@ export const GithubProjects = () => {
           ))}
         </motion.div>
       </div>
-    </section>
+    </div>
   );
 };
