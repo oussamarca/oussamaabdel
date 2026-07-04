@@ -4,7 +4,6 @@ import { About } from "@/components/sections/About";
 import { WhatIDo } from "@/components/sections/WhatIDo";
 import { Work } from "@/components/sections/Work";
 import { TechStack } from "@/components/sections/TechStack";
-import { GithubProjects } from "@/components/sections/GithubProjects";
 import { Certifications } from "@/components/sections/Certifications";
 import { Philosophy } from "@/components/sections/Philosophy";
 import { Contact } from "@/components/sections/Contact";
