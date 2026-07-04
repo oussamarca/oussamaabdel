@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Brain, Sparkles, Github } from "lucide-react";
+import { ArrowRight, Github } from "lucide-react";
 import { Typewriter } from "@/components/ui/typewriter";
 import profilePhoto from "@/assets/profile-photo.png";
 export const Hero = () => {
@@ -83,12 +83,6 @@ export const Hero = () => {
               <a href="#work">
                 View My Work
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </a>
-            </Button>
-            <Button variant="hero-outline" size="xl" asChild>
-              <a href="#about">
-                <Brain className="w-5 h-5" />
-                About Me
               </a>
             </Button>
             <Button variant="hero-outline" size="xl" asChild>
