@@ -18,7 +18,6 @@ const Index = () => {
       <About />
       <WhatIDo />
       <Work />
-      <GithubProjects />
       <TechStack />
       <Certifications />
       <Philosophy />
