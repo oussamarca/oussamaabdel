@@ -53,7 +53,7 @@ const itemVariants = {
 
 export const WhatIDo = () => {
   return (
-    <section id="skills" className="py-24 relative">
+    <section id="services" className="py-24 relative">
       <div className="absolute inset-0 grid-pattern opacity-30" />
 
       <div className="container mx-auto px-6 relative z-10">
