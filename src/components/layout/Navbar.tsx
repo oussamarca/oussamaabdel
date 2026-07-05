@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Github } from "lucide-react";
+import { Menu, X, Github, Sun, Moon } from "lucide-react";
+
 const navLinks = [{
   name: "Work",
   href: "#work"
@@ -15,9 +16,12 @@ const navLinks = [{
   name: "Contact",
   href: "#contact"
 }];
+
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLightMode, setIsLightMode] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -25,6 +29,31 @@ export const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+    const initialLight = savedTheme === "light" || (!savedTheme && prefersLight);
+    setIsLightMode(initialLight);
+    if (initialLight) {
+      document.documentElement.classList.add("light");
+    } else {
+      document.documentElement.classList.remove("light");
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const next = !isLightMode;
+    setIsLightMode(next);
+    if (next) {
+      document.documentElement.classList.add("light");
+      localStorage.setItem("theme", "light");
+    } else {
+      document.documentElement.classList.remove("light");
+      localStorage.setItem("theme", "dark");
+    }
+  };
+
   return <motion.nav initial={{
     y: -100
   }} animate={{
@@ -49,6 +78,14 @@ export const Navbar = () => {
         }}>
               {link.name}
             </motion.a>)}
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label={isLightMode ? "Switch to dark mode" : "Switch to light mode"}
+            className="p-2.5 rounded-full border border-border bg-secondary/50 text-muted-foreground hover:text-foreground hover:border-primary/40 hover:shadow-[0_0_15px_hsl(var(--primary)/0.15)] transition-all duration-300"
+          >
+            {isLightMode ? <Moon size={20} /> : <Sun size={20} />}
+          </button>
           <a
             href="#contact"
             onClick={(e) => {
@@ -82,6 +119,17 @@ export const Navbar = () => {
             {navLinks.map((link) => <a key={link.name} href={link.href} className="text-muted-foreground hover:text-foreground transition-colors py-2" onClick={() => setIsMobileMenuOpen(false)}>
                 {link.name}
               </a>)}
+            <button
+              type="button"
+              onClick={() => {
+                toggleTheme();
+                setIsMobileMenuOpen(false);
+              }}
+              className="flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-border bg-transparent text-muted-foreground font-semibold text-sm transition-all duration-300 hover:text-foreground hover:border-primary/40 hover:shadow-[0_0_15px_hsl(var(--primary)/0.15)]"
+            >
+              {isLightMode ? <Moon size={18} /> : <Sun size={18} />}
+              {isLightMode ? "Dark Mode" : "Light Mode"}
+            </button>
             <a
               href="#contact"
               onClick={(e) => {
