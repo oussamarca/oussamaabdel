@@ -46,7 +46,7 @@
 
 @layer base {
   .light {
-    --background: 210 33% 98%;
+    --background: 210 30% 96%;
     --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
@@ -55,32 +55,33 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    --primary: 190 100% 45%;
+    --primary: 190 100% 35%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 95%;
+    --secondary: 210 40% 94%;
     --secondary-foreground: 222 47% 11%;
 
-    --muted: 210 40% 92%;
-    --muted-foreground: 215 16% 47%;
+    --muted: 210 40% 90%;
+    --muted-foreground: 215 16% 35%;
 
-    --accent: 270 80% 55%;
+    --accent: 270 80% 48%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 190 100% 45%;
+    --border: 214 32% 88%;
+    --input: 214 32% 88%;
+    --ring: 190 100% 35%;
 
     /* Custom tokens */
-    --glow-primary: 190 100% 45%;
-    --glow-accent: 270 80% 55%;
-    --gradient-start: 190 100% 45%;
-    --gradient-end: 270 80% 55%;
+    --glow-primary: 190 100% 35%;
+    --glow-accent: 270 80% 48%;
+    --gradient-start: 190 100% 35%;
+    --gradient-end: 270 80% 48%;
   }
 }
+
 
 @layer base {
   * {
