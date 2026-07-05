@@ -4,10 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, Github, Sun, Moon } from "lucide-react";
 
 const navLinks = [{
-  name: "Work",
-  href: "#work"
-}, {
-  name: "Skills",
+  name: "Services",
   href: "#skills"
 }, {
   name: "\u00a0Projects",
