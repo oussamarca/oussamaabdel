@@ -74,7 +74,7 @@ export const Contact = () => {
           message: formData.message.trim(),
         };
         await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY);
-      } catch (emailError) {
+      } catch {
         console.error("EmailJS send failed");
         toast.error("Message saved but email failed to send.");
         setSending(false);
