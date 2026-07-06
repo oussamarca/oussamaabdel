@@ -7,7 +7,7 @@ const navLinks = [{
   name: "Services",
   href: "#services"
 }, {
-  name: "\u00a0Projects",
+  name: "Projects",
   href: "#projects"
 }, {
   name: "Skills",
@@ -15,9 +15,6 @@ const navLinks = [{
 }, {
   name: "Certifications",
   href: "#certifications"
-}, {
-  name: "Contact",
-  href: "#contact"
 }];
 
 export const Navbar = () => {
