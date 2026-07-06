@@ -5,9 +5,9 @@ import emailjs from "@emailjs/browser";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
-const EMAILJS_SERVICE_ID = "service_hv3hoeg";
-const EMAILJS_TEMPLATE_ID = "template_ylde5dp";
-const EMAILJS_PUBLIC_KEY = "budvjv9w39FxFHy1X";
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID as string;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string;
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string;
 const WHATSAPP_NUMBER = "212629162012";
 
 interface FormErrors {
@@ -60,7 +60,7 @@ export const Contact = () => {
         { name: formData.name.trim(), email: formData.email.trim(), message: formData.message.trim() },
       ]);
       if (dbError) {
-        console.error("Supabase error:", dbError);
+        console.error("Message storage failed");
         toast.error("Failed to save message. Please try again.");
         setSending(false);
         return;
@@ -73,11 +73,9 @@ export const Contact = () => {
           email: formData.email.trim(),
           message: formData.message.trim(),
         };
-        console.log("EmailJS sending with params:", templateParams);
-        const res = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY);
-        console.log("SUCCESS", res);
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY);
       } catch (emailError) {
-        console.error("EmailJS error:", emailError);
+        console.error("EmailJS send failed");
         toast.error("Message saved but email failed to send.");
         setSending(false);
         return;
