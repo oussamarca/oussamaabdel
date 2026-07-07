@@ -51,28 +51,22 @@ export const Contact = () => {
 
     setSending(true);
     try {
-      // Step 1: Save to Supabase
-      const { error: dbError } = await supabase.from("contact").insert([
+      // Save to backend (best-effort; don't block email on DB error)
+      await supabase.from("contact").insert([
         { name: formData.name.trim(), email: formData.email.trim(), message: formData.message.trim() },
       ]);
-      if (dbError) {
-        console.error("Message storage failed");
-        toast.error("Failed to save message. Please try again.");
-        setSending(false);
-        return;
-      }
 
-      // Step 2: Send email via EmailJS
-      try {
-        const templateParams = {
+      // Send email via secure edge function (Resend)
+      const { data, error } = await supabase.functions.invoke("send-contact-email", {
+        body: {
           name: formData.name.trim(),
           email: formData.email.trim(),
           message: formData.message.trim(),
-        };
-        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY);
-      } catch {
-        console.error("EmailJS send failed");
-        toast.error("Message saved but email failed to send.");
+        },
+      });
+
+      if (error || !data?.success) {
+        toast.error("Failed to send your message. Please try again.");
         setSending(false);
         return;
       }
@@ -80,7 +74,7 @@ export const Contact = () => {
       setSent(true);
       setFormData({ name: "", email: "", message: "" });
       setErrors({});
-      toast.success("Message sent successfully ✅");
+      toast.success("Your message has been sent successfully.");
     } catch (err) {
       console.error("Unexpected error:", err);
       toast.error("Something went wrong. Please try again.");
