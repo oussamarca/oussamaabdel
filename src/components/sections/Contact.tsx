@@ -1,13 +1,9 @@
 import { motion, useInView } from "framer-motion";
 import { Mail, Linkedin, Send, CheckCircle, MessageCircle, Github } from "lucide-react";
 import { useRef, useState, FormEvent } from "react";
-import emailjs from "@emailjs/browser";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 
-const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID as string;
-const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string;
-const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string;
 const WHATSAPP_NUMBER = "212629162012";
 
 interface FormErrors {
